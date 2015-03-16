@@ -37,3 +37,20 @@ function create_shader(id) {
     alert(gl.getShaderInfoLog(shader));
   }
 }
+
+function create_program(vs, fs) {
+  var program = gl.createProgram();
+
+  gl.attachShader(program, vs);
+  gl.attachShader(program, fs);
+
+  gl.linkProgram(program);
+
+  if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    gl.useProgram(program)
+
+    return program;
+  } else {
+    alert(gl.getProgramInfoLog(program));
+  }
+}
