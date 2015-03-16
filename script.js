@@ -8,3 +8,32 @@ onload = function() {
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.clear(gl.COLOR_BUFFER_BIT);
 };
+
+function create_shader(id) {
+  var shader;
+  var scriptElement = document.getElementById(id);
+
+  if (!scriptElement) {
+    return;
+  }
+
+  switch (scriptElement.type) {
+    case 'x-shader/x-vertex':
+      shader = gl.createShader(gl.VERTEX_SHADER);
+      break;
+    case 'x-shader/x-fragment':
+      shader = gl.createShader(gl.FRAGMENT_SHADER);
+      break;
+    default:
+      return;
+  }
+
+  gl.shaderSource(shader, scriptElement.text);
+  gl.compileShader(shader);
+
+  if (gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    return shader;
+  } else {
+    alert(gl.getShaderInfoLog(shader));
+  }
+}
