@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script id="vshader" type="x-shader/x-vertex">
+attribute vec3 position;
+attribute vec4 color;
+uniform mat4 mvpMatrix;
+varying vec4 vColor;
+
+void main(void) {
+  vColor = color;
+  gl_Position = mvpMatrix * position;
+}
+</script>
+<script id="fshader" type="x-shader/x-fragment">
+varying vec4 vColor;
+
+void main(void) {
+  gl_FragColor = vColor;
+}
+</script>
+<script src="script.js"></script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+</html>
